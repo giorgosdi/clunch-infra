@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+env/
+src/
+lib/
+lib64/
+sdist/
+dist/
+.env
+.python-version
+.venv/
+venv/
+ENV/
+
