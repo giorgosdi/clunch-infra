@@ -1,0 +1,13 @@
+template_path: templates/jinja/generate_sec_group.py
+parameters:
+
+
+  VpcId: !stack_output dev/network/vpc::VpcId
+  SecGroupName: giorgos-clunch-global-security-group
+  SecGroupDescription: Test security group for PoC
+
+
+sceptre_user_data:
+  tags:
+    Name: Giorgos' PoC sec group
+    Owner: giorgos.dimitriou

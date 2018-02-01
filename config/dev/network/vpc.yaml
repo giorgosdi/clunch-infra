@@ -1,0 +1,13 @@
+---
+template_path: templates/jinja/generate_vpc.py
+parameters:
+  cidr: 12.0.0.0/16
+sceptre_user_data:
+  VPC:
+    AttachIgw: true
+    EnableDNSsupport: true
+    EnableDNShostname: true
+    InstanceTenancy: default
+  tags:
+    Name: Giorgos' VPC
+    Owner: giorgos.dimitriou

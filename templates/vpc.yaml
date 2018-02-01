@@ -1,0 +1,49 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  cidr:
+    Type: String
+
+
+Resources:
+  myVPC:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: !Ref cidr
+      EnableDnsSupport: {{ config['VPC']['EnableDNSsupport'] }}
+      EnableDnsHostnames: {{ config['VPC']['EnableDNShostname'] }}
+      InstanceTenancy: {{ config['VPC']['InstanceTenancy'] }}
+
+
+
+  myInternetGateaway:
+    Type: "AWS::EC2::InternetGateway"
+    Properties: 
+    {% for tag in config.tags %}
+      Tags:
+      - Key: {{ tag }}
+        Value: {{ config.tags[tag] }}
+    {% endfor %}
+
+  myGWAttachment:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties: 
+      InternetGatewayId: !Ref myInternetGateaway
+      VpcId: !Ref myVPC
+
+
+Outputs:
+  VpcId:
+    Description: The VPC Id
+    Value: !Ref myVPC
+
+  VpcCidr:
+    Description: VPC Cidr
+    Value: !GetAtt ["myVPC", "CidrBlock"]
+  
+
+
+  IGWid:
+    Description: The IGW Id
+    Value: !Ref myInternetGateaway

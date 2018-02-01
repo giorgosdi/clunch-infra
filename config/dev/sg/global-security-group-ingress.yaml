@@ -1,0 +1,12 @@
+template_path: templates/jinja/generate_security_group_ingress.py
+parameters:
+  VpcCidr: !stack_output dev/network/vpc::VpcCidr
+  # GroupId: !stack_output dev/sg/global-security-group::SecurityGroupId
+
+sceptre_user_data:
+  tags:
+    Name: Giorgos' PoC sec group
+    Owner: giorgos.dimitriou
+  rules:
+    - tcp 88.98.209.164/32 80
+    - tcp 88.98.209.164/32 443

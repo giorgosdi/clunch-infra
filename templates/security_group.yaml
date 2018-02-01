@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  VpcId:
+    Type: String
+  SecutiryGroupName:
+    Type: String
+  SecurityGroupDescription:
+    Type: String
+
+Resources:
+  SecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupName: !Ref SecutiryGroupName
+      GroupDescription: !Ref SecurityGroupDescription
+      VpcId: !Ref VpcId
+
+Outputs:
+  SecurityGroupId:
+    Description: Security Group ID
+    Value: !Ref SecurityGroup

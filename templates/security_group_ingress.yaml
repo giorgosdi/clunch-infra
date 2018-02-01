@@ -1,0 +1,20 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  VpcCidr:
+    Type: String
+  GroupId:
+    Type: String
+
+Resources:
+  SecurityGroupIngress:
+    Type: "AWS::EC2::SecurityGroupIngress"
+    Properties: 
+      {% for rule in config %}
+      - IpProtocol: {{rule.protocol}}
+        FromPort: {{rule.from}}
+        ToPort: {{rule.to}}
+        CidrIp: {{rule.ip}}
+        GroupId: !Ref GroupId 
+      {% endfor %}

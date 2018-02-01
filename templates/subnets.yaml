@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  vpcCidr:
+    Type: String
+
+
+Resources:
+  PrivateSubnetA:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      CidrBlock: {{ config['Subnets']['Cidrs']['PrivateA'] }}
+      VpcId: !Ref vpcCidr
+      Tags:
+      {% for tag in config['tags'] %}
+      - Key: {{ tag }}
+        Value: {{ config['tags'][tag] }}
+      {% endfor %}
+
+  PrivateSubnetB:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      CidrBlock: {{ config['Subnets']['Cidrs']['PrivateB'] }}
+      VpcId: !Ref vpcCidr
+      Tags:
+      {% for tag in config['tags'] %}
+      - Key: {{ tag }}
+        Value: {{ config['tags'][tag] }}
+      {% endfor %}
+  PublicSubnetA:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      CidrBlock: {{ config['Subnets']['Cidrs']['PublicA'] }}
+      VpcId: !Ref vpcCidr
+      Tags:
+      {% for tag in config['tags'] %}
+      - Key: {{ tag }}
+        Value: {{ config['tags'][tag] }}
+      {% endfor %}
+  PublicSubnetB:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      CidrBlock: {{ config['Subnets']['Cidrs']['PublicB'] }}
+      VpcId: !Ref vpcCidr
+      Tags:
+      {% for tag in config['tags'] %}
+      - Key: {{ tag }}
+        Value: {{ config['tags'][tag] }}
+      {% endfor %}
+      
